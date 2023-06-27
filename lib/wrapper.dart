@@ -140,16 +140,44 @@ class _WrapperState extends State<Wrapper> {
                                                                     },
                                                                   );
                                                                   plans.sort((a, b) => a.startTime.compareTo(b.startTime));
-                                                                  return AdminHome(
-                                                                    userModel: userModel,
-                                                                    firmaModel: firmaModel,
-                                                                    obyektModel: obyektModel,
-                                                                    firmaxabarlar: firmaxabarlar,
-                                                                    ishchilar: ishchilar,
-                                                                    changeObyekt: changeObyekt,
-                                                                    orders: orders,
-                                                                    plans: plans,
-                                                                  );
+                                                                  return StreamBuilder(
+                                                                      stream: FirebaseFirestore.instance
+                                                                          .collection(obyektModel.obyektUid)
+                                                                          .doc('ombor')
+                                                                          .snapshots(),
+                                                                      builder: ((context, omborsnapshots) {
+                                                                        if (omborsnapshots.hasData) {
+                                                                          Map<String, OmborModel> ombor = {};
+
+                                                                          omborsnapshots.data!.data()!.forEach(
+                                                                            (key, value) {
+                                                                              OmborModel omborModel = OmborModel.fromMap(value);
+                                                                              ombor[omborModel.itemUid] = omborModel;
+                                                                            },
+                                                                          );
+                                                                          return AdminHome(
+                                                                            userModel: userModel,
+                                                                            firmaModel: firmaModel,
+                                                                            obyektModel: obyektModel,
+                                                                            firmaxabarlar: firmaxabarlar,
+                                                                            ishchilar: ishchilar,
+                                                                            changeObyekt: changeObyekt,
+                                                                            orders: orders,
+                                                                            plans: plans,
+                                                                            ombor: ombor,
+                                                                          );
+                                                                        } else {
+                                                                          return const Material(
+                                                                            color: MyColors.bgColor,
+                                                                            child: Center(
+                                                                              child: SpinKitSpinningLines(
+                                                                                color: Colors.deepPurple,
+                                                                                size: 99.0,
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        }
+                                                                      }));
                                                                 } else {
                                                                   return const Material(
                                                                     color: MyColors.bgColor,
