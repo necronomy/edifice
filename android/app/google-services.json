@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "543575124755",
+    "project_id": "necro-mybuilding",
+    "storage_bucket": "necro-mybuilding.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543575124755:android:0f6a5fec9fd25a325348e6",
+        "android_client_info": {
+          "package_name": "com.example.mybuilding"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxl-ZY4sKu-K-VNnTfRg515FJpQE7ao5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
